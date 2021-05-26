@@ -44,13 +44,13 @@ def test_asset_duplicate_name(test_assets):
     )
     test_assets.add(asset)
     test_assets.commit()
-
     asset = Asset(
         name=data["name"],
         asset_class=data["asset_class"],
         created_at=data["created_at"],
     )
     test_assets.add(asset)
+
     with pytest.raises(IntegrityError):
         test_assets.commit()
 
@@ -240,15 +240,15 @@ def test_asset_deserializer(app, monkeypatch, test_assets):
     # must import inside test for correct ENV var to get set for test
     from asset_store.serializers import AssetSerializer
 
-    asset = {"name": "test123", "asset_class": "dove", "asset_type": "satellite"}
+    asset_data = {"name": "test123", "asset_class": "dove", "asset_type": "satellite"}
 
     serializer = AssetSerializer()
-    output = serializer.deserialize(asset)
+    output = serializer.deserialize(asset_data)
     expected_class = test_assets.query(AssetClass).filter_by(class_name="dove").one().id
     asset = Asset(name="test123", asset_class=expected_class, created_at=datetime.now())
 
-    assert output.name == asset.name
-    assert output.asset_class == asset.asset_class
+    assert output.name == asset_data["name"]
+    assert output.asset_class == 1 # dove
 
 
 def test_asset_property(app, test_assets):

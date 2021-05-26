@@ -12,7 +12,7 @@ class AssetSerializer:
     def serialize(self):
         if self.assets:
             return self.serialize_assets(self.assets)
-        if self.asset:
+        elif self.asset:
             return self.split_asset(self.asset)
         return {}
 

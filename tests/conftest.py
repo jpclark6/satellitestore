@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 
 import pytest
@@ -19,6 +18,7 @@ def app(monkeypatch, test_assets):
 
     monkeypatch.setattr(db, "get_db_session", mock_return)
 
+    # must import after monkeypatch
     from asset_store import create_app
 
     app = create_app({"SQLITE_URL": "sqlite://"})

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from sqlalchemy.exc import NoResultFound, IntegrityError
 
-from .models import Asset, AssetClass
+from .models import Asset
 from .db import get_db_session
 from .serializers import AssetSerializer
 
