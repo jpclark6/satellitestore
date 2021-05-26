@@ -1,19 +1,26 @@
 #!/bin/bash
 
-# show all output, exit after any error
-set -x
-set -e
-
-# set up virtual environment
+echo "Setting up virtual environment"
 python -m venv venv
+source venv/bin/activate
 
-# download requirements
+echo "Downloading and installing requirements"
 pip install -r requirements.txt
 
-# set env var for flask
+# set env var required for flask
 export FLASK_APP=asset_store
 
-# run database migrations
+echo "Running migrations"
 alembic upgrade head
 
-echo "Now type `flask run` to begin running the app locally"
+echo "Running tests"
+pytest
+
+echo "Adding fake data to database"
+python database/add_random_data.py
+
+echo
+echo "Starting flask. To restart at any point run 'flask run' to begin running the app locally"
+echo
+
+flask run

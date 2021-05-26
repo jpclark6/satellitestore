@@ -41,6 +41,8 @@ def asset_detail(asset_name):
 @bp.route('/assets/', methods=['POST'])
 def create_asset():
     data = request.json
+    if not data:
+        return jsonify({'error': 'missing data'}), 400
     serializer = AssetSerializer()
     session = get_db_session()
     try:

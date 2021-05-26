@@ -41,7 +41,7 @@ class Asset(Base):
 
     @property
     def asset_type(self):
-        return self.asset_class.class_type.value
+        return self.asset_class_details.class_type.value
 
     def verify_type(self, asset_class_detail, asset_type):
         assert asset_class_detail.class_type.value == asset_type

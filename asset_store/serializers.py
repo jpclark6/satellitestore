@@ -27,10 +27,12 @@ class AssetSerializer:
         name = asset.name
         asset_class = asset.asset_class_details.class_name.value
         asset_type = asset.asset_class_details.class_type.value
+        created_at = str(asset.created_at)
         return {
             'name': name,
             'asset_class': asset_class,
             'asset_type': asset_type,
+            'created_at': created_at,
         }
 
     def deserialize(self, data):
