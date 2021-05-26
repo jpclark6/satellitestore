@@ -5,6 +5,7 @@
 This is a simple REST API to allow the cataloging of satellites and antennas. They must fall in to certain types and classes to be considered valid.
 
 Satellites: dove, rapideye, or skysat
+
 Antennas: dish or yagi
 
 Endpoints:
