@@ -10,7 +10,7 @@ from sqlalchemy.sql.expression import null
 Base = declarative_base()
 
 
-class TypeChoice(enum.Enum):
+class AssetTypeChoice(enum.Enum):
     SATELLITE = "satellite"
     ANTENNA = "antenna"
 
@@ -51,6 +51,6 @@ class AssetClass(Base):
         Enum(AssetClassChoice, values_callable=lambda obj: [e.value for e in obj]), nullable=False
     )
     class_type = Column(
-        Enum(TypeChoice, values_callable=lambda obj: [e.value for e in obj]), nullable=False
+        Enum(AssetTypeChoice, values_callable=lambda obj: [e.value for e in obj]), nullable=False
     )
-    assets = relationship("Asset", backref="asset_class")
+    assets = relationship("Asset", backref="asset_class_details")

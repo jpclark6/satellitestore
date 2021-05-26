@@ -21,7 +21,7 @@ def upgrade():
     asset_class_table = op.create_table('asset_class',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('class_name', sa.Enum('dove', 'rapideye', 'skysat', 'dish', 'yagi', name='assetclasschoice'), nullable=False),
-    sa.Column('class_type', sa.Enum('satellite', 'antenna', name='typechoice'), nullable=False),
+    sa.Column('class_type', sa.Enum('satellite', 'antenna', name='assettypechoice'), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('asset',
