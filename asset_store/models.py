@@ -6,8 +6,6 @@ from sqlalchemy.orm import relationship, backref, validates
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql.expression import null
 
-from .db import get_db_session
-
 
 Base = declarative_base()
 

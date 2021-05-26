@@ -34,15 +34,18 @@ class AssetSerializer:
         }
 
     def deserialize(self, data):
-        name = data['name']
         session = get_db_session()
-        asset_class_name = data['asset_class']
-        asset_type = data['asset_type']
-        asset_class = session.query(AssetClass).filter_by(class_name=asset_class_name).one()
-        asset = Asset(
-            name=name,
-            asset_class=asset_class.id,
-            created_at=func.now()
-        )
-        asset.verify_type(asset_class, asset_type)
-        return asset
+        try:
+            name = data['name']
+            asset_class_name = data['asset_class']
+            asset_type = data['asset_type']
+            asset_class = session.query(AssetClass).filter_by(class_name=asset_class_name).one()
+            asset = Asset(
+                name=name,
+                asset_class=asset_class.id,
+                created_at=func.now()
+            )
+            asset.verify_type(asset_class, asset_type)
+            return asset
+        finally:
+            session.close()

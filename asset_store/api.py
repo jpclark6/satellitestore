@@ -12,13 +12,16 @@ bp = Blueprint('api', __name__, url_prefix='/api/v1')
 @bp.route('/assets/', methods=['GET'])
 def list_assets():
     session = get_db_session()
-    assets = session.query(Asset).all()
-    if assets:
-        serializer = AssetSerializer(assets=assets)
-        data = serializer.serialize()
-        return jsonify(data)
-    else:
-        return jsonify([])
+    try:
+        assets = session.query(Asset).all()
+        if assets:
+            serializer = AssetSerializer(assets=assets)
+            data = serializer.serialize()
+            return jsonify(data)
+        else:
+            return jsonify([])
+    finally:
+        session.close()
 
 
 @bp.route('/assets/<asset_name>')
@@ -31,19 +34,23 @@ def asset_detail(asset_name):
         return jsonify(data)
     except NoResultFound:
         return jsonify({})
+    finally:
+        session.close()
 
 
 @bp.route('/assets/', methods=['POST'])
 def create_asset():
     data = request.json
     serializer = AssetSerializer()
+    session = get_db_session()
     try:
         asset = serializer.deserialize(data)
-        session = get_db_session()
         session.add(asset)
         session.commit()
         return '', 201
-    except (AssertionError, NoResultFound):
+    except (AssertionError, NoResultFound, KeyError):
         return jsonify({'error': 'invalid data'}), 400
     except IntegrityError:
         return jsonify({'error': 'data already exists'}), 409
+    finally:
+        session.close()
