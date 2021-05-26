@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
-from sqlalchemy.exc import NoResultFound, IntegrityError
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import IntegrityError
 
 from .models import Asset
 from .db import get_db_session

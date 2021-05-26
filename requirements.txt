@@ -1,5 +1,7 @@
 alembic==1.6.4
+appdirs==1.4.4
 attrs==21.2.0
+black==21.5b1
 click==8.0.1
 Faker==8.2.1
 Flask==2.0.1
@@ -10,13 +12,16 @@ itsdangerous==2.0.1
 Jinja2==3.0.1
 Mako==1.1.4
 MarkupSafe==2.0.1
+mypy-extensions==0.4.3
 packaging==20.9
+pathspec==0.8.1
 pluggy==0.13.1
 py==1.10.0
 pyparsing==2.4.7
 pytest==6.2.4
 python-dateutil==2.8.1
 python-editor==1.0.4
+regex==2021.4.4
 six==1.16.0
 SQLAlchemy==1.4.15
 text-unidecode==1.3
