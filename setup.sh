@@ -14,6 +14,8 @@ echo "Running migrations"
 alembic upgrade head
 
 echo "Running tests"
+deactivate # freezegun acting weird if this isn't here
+source venv/bin/activate
 pytest
 
 echo "Adding fake data to database"
