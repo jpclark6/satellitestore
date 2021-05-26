@@ -1,4 +1,4 @@
-from enum import Enum
+import enum
 import re
 
 from sqlalchemy import Column, Integer, String, ForeignKey, Enum, DateTime
@@ -10,12 +10,12 @@ from sqlalchemy.sql.expression import null
 Base = declarative_base()
 
 
-class TypeChoice(Enum):
+class TypeChoice(enum.Enum):
     SATELLITE = "satellite"
     ANTENNA = "antenna"
 
 
-class AssetClassChoice(Enum):
+class AssetClassChoice(enum.Enum):
     DOVE = "dove"
     RAPIDEYE = "rapideye"
     SKYSAT = "skysat"
