@@ -73,3 +73,5 @@ pytest
 * Didn't add any DB hooks to stop deletes or updates from happening if someone else was to impliment it later on. There's no functionality to do deletes or updates, but there's no deterrents for having someone come in and add it.
 
 * I didn't add a lot of data validation and missed some error handling due to timeboxing this. There are probably some edge cases to break it with bad requests.
+
+* Is a relational database the way to go? If additional info is available for each class of asset then a NoSQL database may be the best choice so that additional info can be added for each asset. This would have been on par with implimenting an RDB in this situation, but I'm most familiar with DynamoDB and didn't want to introduce an AWS dependency.
