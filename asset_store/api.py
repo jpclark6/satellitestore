@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify
+from sqlalchemy.exc import NoResultFound
 
 from .models import Asset, AssetClass
 from .db import get_db_session
@@ -17,4 +18,16 @@ def list_assets():
         data = serializer.serialize()
         return jsonify(data)
     else:
+        return jsonify([])
+
+
+@bp.route('/assets/<asset_name>')
+def asset_detail(asset_name):
+    session = get_db_session()
+    try:
+        asset = session.query(Asset).filter_by(name=asset_name).one()
+        serializer = AssetSerializer(asset=asset)
+        data = serializer.serialize()
+        return jsonify(data)
+    except NoResultFound:
         return jsonify({})
