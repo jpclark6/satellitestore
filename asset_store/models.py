@@ -6,6 +6,8 @@ from sqlalchemy.orm import relationship, backref, validates
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql.expression import null
 
+from .db import get_db_session
+
 
 Base = declarative_base()
 
@@ -42,6 +44,9 @@ class Asset(Base):
     @property
     def asset_type(self):
         return self.asset_class.class_type.value
+
+    def verify_type(self, asset_class_detail, asset_type):
+        assert asset_class_detail.class_type.value == asset_type
 
 
 class AssetClass(Base):
