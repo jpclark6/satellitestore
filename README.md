@@ -27,13 +27,16 @@ To setup the app and database and begin running locally run the following
 
 ```
 source ./setup.sh
+flask run
 ```
 
-This will set up your virtual environment, install requirements, run database migrations, verify all tests are passing, add sample data to the database, and start the app.
+This will set up your virtual environment, install requirements, run database migrations, verify all tests are passing, add sample data to the database, and then run the app.
 
 To run the flask app afterward at any point run the following (will need to also reactivate your virtual env and reset FLASK_APP var if you close the terminal)
 
 ```
+source venv/bin/activate
+export FLASK_APP=asset_store
 flask run
 ```
 

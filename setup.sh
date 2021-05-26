@@ -20,7 +20,4 @@ echo "Adding fake data to database"
 python database/add_random_data.py
 
 echo
-echo "Starting flask. To restart at any point run 'flask run' to begin running the app locally"
-echo
-
-flask run
+echo "To start the flask app run 'flask run' to begin running the app locally"
