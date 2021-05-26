@@ -26,7 +26,7 @@ class AssetClassChoice(enum.Enum):
 class Asset(Base):
     __tablename__ = "asset"
     name = Column(String(64), primary_key=True)
-    asset_class = Column(Integer, ForeignKey('asset_class.id'))
+    asset_class = Column(Integer, ForeignKey("asset_class.id"))
     created_at = Column(DateTime)
 
     @validates("name")
@@ -51,9 +51,11 @@ class AssetClass(Base):
     __tablename__ = "asset_class"
     id = Column(Integer, primary_key=True)
     class_name = Column(
-        Enum(AssetClassChoice, values_callable=lambda obj: [e.value for e in obj]), nullable=False
+        Enum(AssetClassChoice, values_callable=lambda obj: [e.value for e in obj]),
+        nullable=False,
     )
     class_type = Column(
-        Enum(AssetTypeChoice, values_callable=lambda obj: [e.value for e in obj]), nullable=False
+        Enum(AssetTypeChoice, values_callable=lambda obj: [e.value for e in obj]),
+        nullable=False,
     )
     assets = relationship("Asset", backref="asset_class_details")

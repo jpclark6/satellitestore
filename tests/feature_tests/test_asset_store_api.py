@@ -102,8 +102,16 @@ def test_create_invalid_asset_name_nonascii(client):
 @freeze_time("2021-05-26")
 def test_create_invalid_asset_type_antenna(client):
     data_dove = {"asset_class": "dove", "asset_type": "antenna", "name": "testcheck"}
-    data_rapideye = {"asset_class": "rapideye", "asset_type": "antenna", "name": "testcheck"}
-    data_skysat = {"asset_class": "skysat", "asset_type": "antenna", "name": "testcheck"}
+    data_rapideye = {
+        "asset_class": "rapideye",
+        "asset_type": "antenna",
+        "name": "testcheck",
+    }
+    data_skysat = {
+        "asset_class": "skysat",
+        "asset_type": "antenna",
+        "name": "testcheck",
+    }
 
     created_response_dove = client.post("/api/v1/assets/", json=data_dove)
     created_response_rapideye = client.post("/api/v1/assets/", json=data_rapideye)

@@ -6,10 +6,10 @@ from .db import get_db_session
 from .serializers import AssetSerializer
 
 
-bp = Blueprint('api', __name__, url_prefix='/api/v1')
+bp = Blueprint("api", __name__, url_prefix="/api/v1")
 
 
-@bp.route('/assets/', methods=['GET'])
+@bp.route("/assets/", methods=["GET"])
 def list_assets():
     session = get_db_session()
     try:
@@ -24,7 +24,7 @@ def list_assets():
         session.close()
 
 
-@bp.route('/assets/<asset_name>')
+@bp.route("/assets/<asset_name>")
 def asset_detail(asset_name):
     session = get_db_session()
     try:
@@ -38,21 +38,21 @@ def asset_detail(asset_name):
         session.close()
 
 
-@bp.route('/assets/', methods=['POST'])
+@bp.route("/assets/", methods=["POST"])
 def create_asset():
     data = request.json
     if not data:
-        return jsonify({'error': 'missing data'}), 400
+        return jsonify({"error": "missing data"}), 400
     serializer = AssetSerializer()
     session = get_db_session()
     try:
         asset = serializer.deserialize(data)
         session.add(asset)
         session.commit()
-        return '', 201
+        return "", 201
     except (AssertionError, NoResultFound, KeyError):
-        return jsonify({'error': 'invalid data'}), 400
+        return jsonify({"error": "invalid data"}), 400
     except IntegrityError:
-        return jsonify({'error': 'data already exists'}), 409
+        return jsonify({"error": "data already exists"}), 409
     finally:
         session.close()

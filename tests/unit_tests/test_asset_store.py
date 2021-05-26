@@ -254,13 +254,13 @@ def test_asset_deserializer(app, monkeypatch, test_assets):
 def test_asset_property(app, test_assets):
     asset = test_assets.query(Asset).first()
 
-    assert asset.asset_type == 'satellite'
+    assert asset.asset_type == "satellite"
 
 
 def test_verify_type(app, test_assets):
     asset = test_assets.query(Asset).first()
     asset_class = asset.asset_class_details
 
-    assert None == asset.verify_type(asset_class, 'satellite')
+    assert None == asset.verify_type(asset_class, "satellite")
     with pytest.raises(AssertionError):
-        asset.verify_type(asset_class, 'antenna')
+        asset.verify_type(asset_class, "antenna")
